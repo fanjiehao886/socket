@@ -14,7 +14,7 @@ $server->on('message', function($server, $frame){
     
     //to check if the client is a websocket client
     $client = $server->getClientInfo($frame->fd);
-    if(isset($client['websocket_status'])) {
+    if(!isset($client['websocket_status'])) {
         //use coroutine to start tcp client to send message to device
         $client = new Swoole\Coroutine\Client(SWOOLE_SOCK_TCP);
         if($client->connect('127.0.0.1', 9501, 0.5)) {
