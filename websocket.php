@@ -39,10 +39,12 @@ $server->on('message', function($server, $frame){
             }
         }else if($data['type'] == 'login') {
             echo "received login: {$frame->data}\n";
+        }else if($data['type' == 'info']) {
+            echo "info: {$frame->data}\n";
         }else if($data['type'] == 'ping') {
             //send pong to the client
-            //$json_string = json_encode(['type' => 'pong', 'message_id' => 0, 'message' => 'pong', 'fd' => $frame->fd]);
-            //$server->push($frame->fd, $json_string);
+            $json_string = json_encode(['type' => 'pong', 'message_id' => 255, 'message' => 'pong', 'fd' => $frame->fd]);
+            $server->push($frame->fd, $json_string);
             echo "received ping: {$frame->data}\n";
         }
     }
